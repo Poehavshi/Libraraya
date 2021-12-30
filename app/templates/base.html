@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {%  if title %}
+            {{ title }} - Libraraya
+            {% else %}
+            Welcome to Libraraya
+            {% endif %}
+        </title>
+    </head>
+    <body>
+        <div>Libraraya: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
