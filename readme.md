@@ -1,1 +1,0 @@
-Small project to test Flask
