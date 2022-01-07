@@ -5,7 +5,7 @@ from app.forms import LoginForm
 
 @app.route('/')
 @app.route('/index')
-def hello_world():
+def index():
     user = {"username": "Arkady"}
     books = [
         {
