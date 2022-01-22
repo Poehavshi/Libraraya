@@ -1,4 +1,3 @@
 
 logs
-.idea
-/logs/
+__pycache__
