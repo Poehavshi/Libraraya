@@ -65,7 +65,7 @@ class UserModelCase(unittest.TestCase):
         db.session.add_all([john_post, susan_post, mary_post, david_post])
         db.session.commit()
 
-        # setup the followers
+        # set up the followers
         john.follow(susan)
         john.follow(david)
         susan.follow(mary)
@@ -81,6 +81,7 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(susan_followed_posts, [susan_post, mary_post])
         self.assertEqual(mary_followed_posts, [mary_post, david_post])
         self.assertEqual(david_followed_posts, [david_post])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

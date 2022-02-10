@@ -74,8 +74,6 @@ class User(UserMixin, db.Model):
         return User.query.get(id)
 
 
-
-
 @login.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -90,5 +88,3 @@ class Post(db.Model):
 
     def __repr__(self):
         return f'<Post {self.title}>'
-
-
