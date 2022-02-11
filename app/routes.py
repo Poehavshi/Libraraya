@@ -1,7 +1,7 @@
 from app import app, db
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, g
 from flask_login import current_user, login_user, logout_user, login_required
-from flask_babel import _
+from flask_babel import _, get_locale
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, \
     ResetPasswordRequestForm, ResetPasswordForm
 from app.email import send_password_reset_email
@@ -15,6 +15,7 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+    g.locale = str(get_locale())
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -165,14 +166,14 @@ def edit_profile():
 def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash(_(f'User {username} not found'))
+        flash(_('User %(username)s not found.', username=username))
         return redirect(url_for('index'))
     if user == current_user:
         flash(_('You cannot follow yourself!'))
         return redirect(url_for('user', username=username))
     current_user.follow(user)
     db.session.commit()
-    flash(_(f'You are following {username}'))
+    flash(_('You are following %(username)s!', username=username))
     return redirect(url_for('user_page', username=username))
 
 
@@ -181,12 +182,12 @@ def follow(username):
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash(_(f'User {username} not found'))
+        flash(_('User %(username)s not found.', username=username))
         return redirect(url_for('index'))
     if user == current_user:
         flash(_('You cannot unfollow yourself!'))
         return redirect(url_for('user', username=username))
     current_user.unfollow(user)
     db.session.commit()
-    flash(_(f'You are not following {username}.'))
+    flash(_('You are not following %(username)s.', username=username))
     return redirect(url_for('user_page', username=username))
