@@ -22,6 +22,8 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ["sotnikoarkady1@gmail.com"]
 
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
+
     LANGUAGES = ['en', 'ru']
 
     POSTS_PER_PAGE = 25
